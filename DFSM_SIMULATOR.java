@@ -28,8 +28,7 @@ public class DFSM_SIMULATOR
         for (int i = 0; i < stateCount; i++) 
         {
 
-            String[] transitions = fileScanner.nextLine().replaceAll(" ", "").replaceAll("\\),\\(", " ")
-                    .replaceAll("\\(", "").replaceAll("\\)", "").split(" ");
+            String[] transitions = fileScanner.nextLine().replaceAll(" ", "").replaceAll("\\),\\(", " ").replaceAll("\\(", "").replaceAll("\\)", "").split(" ");
             for (String transition : transitions) 
             {
 
@@ -121,6 +120,11 @@ public class DFSM_SIMULATOR
 
         return false;
     }
+
+
+
+
+    
 
     //main function
     public static void main(String[] args) 
