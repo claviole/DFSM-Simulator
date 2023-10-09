@@ -17,23 +17,8 @@ public class DFSM_SIMULATOR
     private static int symbolCount;
     private static char[] symbols;
     private static int[][] transitionTable;
-
-    //function to find the index of input symbol
-    private static int symbolIndex(char symbol) 
-    {
-
-        for (int i = 0; i < symbolCount; i++) 
-        {
-
-            if (symbols[i] == symbol) 
-            {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
+    
+    
     //function to read the states from dfsm_input 
     private static void buildTransitionTable() 
     {
@@ -54,15 +39,13 @@ public class DFSM_SIMULATOR
             }
         }
     }
-
-
     //load the dfsm_input.txt file
     private static void loadDFSM() 
     {
 
         try 
         {
-            fileScanner = new Scanner(new File("dfsm_input.txt"));
+            fileScanner = new Scanner(new File("page45_no_two_consecutive_chars_are_the_same.txt"));
 
             String[] symbolArray = fileScanner.nextLine().replaceAll(" ", "").split(",");
             symbolCount = symbolArray.length;
@@ -88,6 +71,29 @@ public class DFSM_SIMULATOR
             System.out.println("could not load DFSM file: " + e.getMessage());
         }
     }
+    
+    
+    
+    //function to find the index of input symbol
+    private static int symbolIndex(char symbol) 
+    {
+
+        for (int i = 0; i < symbolCount; i++) 
+        {
+
+            if (symbols[i] == symbol) 
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    
+
+
+    
 
     //function toaccept or reject the input string
     private static boolean validateInput(String input) 
