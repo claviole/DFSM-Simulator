@@ -5,7 +5,9 @@
 
 
 
+
 import java.util.Scanner;
+
 import java.io.File;
 
 public class DFSM_SIMULATOR 
@@ -28,9 +30,8 @@ public class DFSM_SIMULATOR
         for (int i = 0; i < stateCount; i++) 
         {
 
-            String[] transitions = fileScanner.nextLine().replaceAll(" ", "").replaceAll("\\),\\(", " ").replaceAll("\\(", "").replaceAll("\\)", "").split(" ");
-            for (String transition : transitions) 
-            {
+           for (String transition : fileScanner.nextLine().replaceAll(" ", "").replaceAll("\\),\\(", " ").replaceAll("\\(", "").replaceAll("\\)", "").split(" ")) 
+{
 
                 String[] parts = transition.split(",");
                 transitionTable[Integer.parseInt(parts[0])][symbolIndex(parts[1].charAt(0))] = Integer.parseInt(parts[2]);
@@ -39,37 +40,46 @@ public class DFSM_SIMULATOR
         }
     }
     //load the dfsm_input.txt file
-    private static void loadDFSM() 
+   private static void loadDFSM() 
+{
+    fileScanner = null;
+    try 
     {
+        fileScanner = new Scanner(new File("page43_every_a_followed_by_b.txt"));
 
-        try 
+        String[] symbolArray = fileScanner.nextLine().replaceAll(" ", "").split(",");
+        symbolCount = symbolArray.length;
+        symbols = new char[symbolCount];
+
+        for (int i = 0; i < symbolCount; i++) 
         {
-            fileScanner = new Scanner(new File("page45_no_two_consecutive_chars_are_the_same.txt"));
+            symbols[i] = symbolArray[i].charAt(0);
+        }
 
-            String[] symbolArray = fileScanner.nextLine().replaceAll(" ", "").split(",");
-            symbolCount = symbolArray.length;
-            symbols = new char[symbolCount];
+        stateCount = Integer.parseInt(fileScanner.nextLine());
 
-            for (int i = 0; i < symbolCount; i++) 
-            {
-                symbols[i] = symbolArray[i].charAt(0);
-            }
-            stateCount = Integer.parseInt(fileScanner.nextLine());
-            String[] stateArray = fileScanner.nextLine().replaceAll(" ", "").split(",");
-            finalStates = new int[stateArray.length];
-            for (int i = 0; i < stateArray.length; i++) 
-            {
-                finalStates[i] = Integer.parseInt(stateArray[i]);
-            }
+        String[] stateArray = fileScanner.nextLine().replaceAll(" ", "").split(",");
+        finalStates = new int[stateArray.length];
 
-            buildTransitionTable();
-        } 
-
-        catch (Exception e) 
+        for (int i = 0; i < stateArray.length; i++) 
         {
-            System.out.println("could not load DFSM file: " + e.getMessage());
+            finalStates[i] = Integer.parseInt(stateArray[i]);
+        }
+
+        buildTransitionTable();
+    } 
+    catch (Exception e) 
+    {
+        System.out.println("could not load DFSM file: " + e.getMessage());
+    }
+    finally 
+    {
+        if (fileScanner != null) 
+        {
+            fileScanner.close();
         }
     }
+}
     
     
     
