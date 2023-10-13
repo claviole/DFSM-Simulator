@@ -42,10 +42,13 @@ public class DFSM_SIMULATOR
     //load the dfsm_input.txt file
    private static void loadDFSM() 
 {
+    System.out.print("Enter the name of the DFSM file: ");
+    String fileName = inputScanner.nextLine();
+
     fileScanner = null;
     try 
     {
-        fileScanner = new Scanner(new File("page43_every_a_followed_by_b.txt"));
+        fileScanner = new Scanner(new File(fileName));
 
         String[] symbolArray = fileScanner.nextLine().replaceAll(" ", "").split(",");
         symbolCount = symbolArray.length;
